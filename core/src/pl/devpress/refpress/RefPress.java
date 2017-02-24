@@ -1,19 +1,24 @@
 package pl.devpress.refpress;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class RefPress extends ApplicationAdapter {
+public class RefPress extends Game {
+	
+	public static final String GAME_TITLE = "Reflex";
+	public static final int WIDTH = 480;
+	public static final int HEIGHT = 700;
+
 	SpriteBatch batch;
 	Texture img;
-	
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		img = new Texture("reddot.png");
 	}
 
 	@Override
