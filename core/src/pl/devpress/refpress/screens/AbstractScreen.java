@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import pl.devpress.refpress.RefPress;
 
@@ -16,12 +17,18 @@ public abstract class AbstractScreen implements Screen {
 	protected RefPress game;
 	protected Stage stage;
 	protected SpriteBatch spriteBatch;
+	private Viewport viewport;
 	
+	//TODO
+	 // CHOOSE BEST VIEWPORT
 	
 	public AbstractScreen(RefPress game) {
 		this.game = game;
 		createCamera();
-		stage = new Stage(new StretchViewport(RefPress.WIDTH, RefPress.HEIGHT, camera));
+		viewport = new FitViewport(RefPress.WIDTH, RefPress.HEIGHT, camera);
+		stage = new Stage(viewport);
+		//stage = new Stage(new ScreenViewport(camera));
+		//stage = new Stage(new StretchViewport(RefPress.WIDTH, RefPress.HEIGHT, camera));
 		spriteBatch = new SpriteBatch();
 		Gdx.input.setInputProcessor(stage);
 		init();
@@ -54,7 +61,7 @@ public abstract class AbstractScreen implements Screen {
 
 	private void clearScreen() {
 		float gettingRGBColor = 255f;
-		Gdx.gl.glClearColor(0/gettingRGBColor, 102/gettingRGBColor, 204/gettingRGBColor, 1);
+		Gdx.gl.glClearColor(102/gettingRGBColor, 178/gettingRGBColor, 255/gettingRGBColor, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
@@ -66,6 +73,8 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
+		viewport.update(width, height);
+		stage.getViewport().update(width, height);
 	}
 
 	@Override
