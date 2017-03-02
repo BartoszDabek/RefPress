@@ -19,33 +19,24 @@ public abstract class AbstractScreen implements Screen {
 	protected SpriteBatch spriteBatch;
 	private Viewport viewport;
 	
-	//TODO
-	 // CHOOSE BEST VIEWPORT
 	
 	public AbstractScreen(RefPress game) {
 		this.game = game;
 		createCamera();
 		viewport = new FitViewport(RefPress.WIDTH, RefPress.HEIGHT, camera);
 		stage = new Stage(viewport);
-		//stage = new Stage(new ScreenViewport(camera));
-		//stage = new Stage(new StretchViewport(RefPress.WIDTH, RefPress.HEIGHT, camera));
 		spriteBatch = new SpriteBatch();
 		Gdx.input.setInputProcessor(stage);
 		init();
 	}
 	
-	
-	
 	protected abstract void init();
-
 
 	private void createCamera() {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, RefPress.WIDTH, RefPress.HEIGHT);
 		camera.update();
 	}
-
-
 
 	@Override
 	public void show() {
