@@ -45,12 +45,12 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		clearScreen();
+		backgroundColor();
 		camera.update();
 		spriteBatch.setProjectionMatrix(camera.combined);
 	}
 
-	private void clearScreen() {
+	private void backgroundColor() {
 		float gettingRGBColor = 255f;
 		Gdx.gl.glClearColor(102/gettingRGBColor, 178/gettingRGBColor, 255/gettingRGBColor, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
