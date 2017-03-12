@@ -14,12 +14,12 @@ public class PlayScreen extends AbstractScreen {
 	@Override
 	protected void init() {
 		stage.setDebugAll(true);
-		initGameDotService(stage);
+		initGameDotService(stage, game);
 	}
 	
 
-	private void initGameDotService(Stage stage) {
-		new GameDotService(stage);
+	private void initGameDotService(Stage stage, RefPress game) {
+		new GameDotService(stage, game);
 	}
 
 
