@@ -1,9 +1,8 @@
 package pl.devpress.refpress.ui;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
-import pl.devpress.refpress.RefPress;
 
 public class RedDot extends Image{
 
@@ -16,17 +15,18 @@ public class RedDot extends Image{
 		
 		this.setOrigin(WIDHT / 2, HEIGHT / 2);
 		this.setSize(WIDHT, HEIGHT);	
-		this.setPosition(getHalfOfXAxis(),getHalfOfYAxis());
+		this.setPosition(getRandomXAxis(),getRandomYAxis());
 		
 	}
 
-	private float getHalfOfYAxis() {
-		return (RefPress.HEIGHT/2) - (HEIGHT/2);
+	private float getRandomYAxis() {
+		//   0 - 650    Y Axis
+		return MathUtils.random(0, 650);
 	}
-
-	private float getHalfOfXAxis() {
-		return (RefPress.WIDTH/2) - (WIDHT/2);
-	}
-
 	
+	private float getRandomXAxis() {
+		//   0 - 430    X Axis
+		return MathUtils.random(0, 430);
+	}
 }
+
