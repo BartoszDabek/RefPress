@@ -16,9 +16,10 @@ public class GameDotService {
 	
 	private RefPress game;
 	private RedDot redDot;
-	private int timesToRepeat = 0;
-	private long currentTime, timeUntilLastClick, averageReaction, slowestReaction; 
-	private long fastestReaction = 9999999;
+	public static int timesToRepeat = 0;
+	private long currentTime, timeUntilLastClick; 
+	public static long averageReaction, slowestReaction;
+	public static long fastestReaction = 9999999;
 	
 	public GameDotService(Stage stage, RefPress game) {
 		init(stage);
@@ -47,9 +48,10 @@ public class GameDotService {
 					public void run() {
 						if(timesToRepeat >= 5){
 							cancel();
+							System.out.println("Avg: "+getAverageReaction());
 							System.out.println("Fastest reaction: "+ fastestReaction);
 							System.out.println("Slowest reaction: "+ slowestReaction);
-							game.setScreen(new ScoreScreen(game, getAverageReaction()));
+							game.setScreen(new ScoreScreen(game));
 						} else {
 							init(stage);
 						}
@@ -64,9 +66,8 @@ public class GameDotService {
 		
 	}
 	
-	public long getAverageReaction() {
+	public static long getAverageReaction() {
 		return averageReaction/timesToRepeat;
-		
 	}
 	
 	private void generateReactions(long timeUntilLastClick) {
