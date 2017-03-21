@@ -32,6 +32,10 @@ public class GameDotService {
 		spawnInRandomTime();
 	}
 	
+	public static long getAverageReaction() {
+		return averageReaction/timesToRepeat;
+	}
+	
 	private void spawnInRandomTime() {
 		Timer.schedule(new Task() {
 			@Override
@@ -52,27 +56,27 @@ public class GameDotService {
 		redDot.addListener(new ClickListener(){
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				timesToRepeat++;
 				redDot.remove();
-				timeUntilDotSpawn = TimeUtils.timeSinceMillis(currentTime);
-				generateReactions(timeUntilDotSpawn);
+				generateReactions();
+				isGameFinished();
 				
-				if(timesToRepeat >= 5){
-					game.setScreen(new ScoreScreen(game));
-				} else {
-					spawnInRandomTime();
-				}
 				return super.touchDown(event, x, y, pointer, button);
 			}
 		});
 	}
 	
-	
-	public static long getAverageReaction() {
-		return averageReaction/timesToRepeat;
+	private void isGameFinished() {
+		timesToRepeat++;
+		
+		if(timesToRepeat >= 5){
+			game.setScreen(new ScoreScreen(game));
+		} else {
+			spawnInRandomTime();
+		}
 	}
 	
-	private void generateReactions(long timeUntilDotSpawn) {
+	private void generateReactions() {
+		timeUntilDotSpawn = TimeUtils.timeSinceMillis(currentTime);
 		averageReaction += timeUntilDotSpawn;
 		if (fastestReaction > timeUntilDotSpawn)
 				fastestReaction = timeUntilDotSpawn;
