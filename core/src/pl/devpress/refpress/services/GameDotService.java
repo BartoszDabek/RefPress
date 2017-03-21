@@ -16,67 +16,68 @@ public class GameDotService {
 	
 	private RefPress game;
 	private RedDot redDot;
+	private Stage stage;
 	public static int timesToRepeat = 0;
-	private long currentTime, timeUntilLastClick; 
+	private long currentTime, timeUntilDotSpawn; 
 	public static long averageReaction, slowestReaction;
 	public static long fastestReaction = 9999999;
 	
 	public GameDotService(Stage stage, RefPress game) {
-		init(stage);
 		this.game = game;
+		this.stage = stage;
+		init();
 	}
 
-	private void init(final Stage stage) {
-		
+	private void init() {
+		spawnInRandomTime();
+	}
+	
+	private void spawnInRandomTime() {
+		Timer.schedule(new Task() {
+			@Override
+			public void run() {
+				spawnDot();
+				reactOnClick();
+			}
+		}, generateRandomSpawnTime());
+	}
+	
+	private void spawnDot() {
 		redDot = new RedDot();
 		stage.addActor(redDot);
-		
 		currentTime = TimeUtils.millis();
-		
+	}
+	
+	private void reactOnClick() {
 		redDot.addListener(new ClickListener(){
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				timesToRepeat++;
-				System.out.println(timesToRepeat);
 				redDot.remove();
-				timeUntilLastClick = TimeUtils.timeSinceMillis(currentTime);
-				generateReactions(timeUntilLastClick);
+				timeUntilDotSpawn = TimeUtils.timeSinceMillis(currentTime);
+				generateReactions(timeUntilDotSpawn);
 				
-				
-				Timer.schedule(new Task() {
-					@Override
-					public void run() {
-						if(timesToRepeat >= 5){
-							cancel();
-							System.out.println("Avg: "+getAverageReaction());
-							System.out.println("Fastest reaction: "+ fastestReaction);
-							System.out.println("Slowest reaction: "+ slowestReaction);
-							game.setScreen(new ScoreScreen(game));
-						} else {
-							init(stage);
-						}
-					}
-
-				}, generateRandomSpawnTime());
+				if(timesToRepeat >= 5){
+					game.setScreen(new ScoreScreen(game));
+				} else {
+					spawnInRandomTime();
+				}
 				return super.touchDown(event, x, y, pointer, button);
 			}
-
-
 		});
-		
 	}
+	
 	
 	public static long getAverageReaction() {
 		return averageReaction/timesToRepeat;
 	}
 	
-	private void generateReactions(long timeUntilLastClick) {
-		System.out.println("time since: "+ timeUntilLastClick);
-		averageReaction += timeUntilLastClick;
-		if (fastestReaction > timeUntilLastClick)
-				fastestReaction = timeUntilLastClick;
-		if (timeUntilLastClick > slowestReaction)
-				slowestReaction = timeUntilLastClick;
+	private void generateReactions(long timeUntilDotSpawn) {
+		averageReaction += timeUntilDotSpawn;
+		if (fastestReaction > timeUntilDotSpawn)
+				fastestReaction = timeUntilDotSpawn;
+		if (timeUntilDotSpawn > slowestReaction)
+				slowestReaction = timeUntilDotSpawn;
 	}
 	
 	private float generateRandomSpawnTime() {
