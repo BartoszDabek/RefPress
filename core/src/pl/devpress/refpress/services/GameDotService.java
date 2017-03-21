@@ -40,13 +40,13 @@ public class GameDotService {
 		Timer.schedule(new Task() {
 			@Override
 			public void run() {
-				spawnDot();
+				createDot();
 				reactOnClick();
 			}
 		}, generateRandomSpawnTime());
 	}
 	
-	private void spawnDot() {
+	private void createDot() {
 		redDot = new RedDot();
 		stage.addActor(redDot);
 		currentTime = TimeUtils.millis();
