@@ -8,17 +8,22 @@ import pl.devpress.refpress.services.GameDotService;
 
 public class ScoreScreen extends AbstractScreen {
 
+	private int oszukiwacz = 0;
 	private String averageReaction;
 	private String slowestReaction;
 	private String fastestReaction;
 	private String message;
 	BitmapFont mapFont;
 	
+	
 	public ScoreScreen(RefPress game) {
 		super(game);
-		displayScore();
 	}
 
+	@Override
+	protected void init() {
+		displayScore();
+	}
 
 	private void displayScore() {
 		averageReaction = "Average reaction: " + GameDotService.getAverageReaction() + "ms";
@@ -29,11 +34,15 @@ public class ScoreScreen extends AbstractScreen {
 	}
 
 
-	@Override
-	protected void init() {
-		
+	private void setScreen() {
+		if(oszukiwacz == 2) {
+			game.setScreen(new MenuScreen(game));
+			GameDotService.timesToRepeat = 0;
+			GameDotService.averageReaction = 0;
+			GameDotService.slowestReaction = 0;
+			GameDotService.fastestReaction = 9999999;
+		}
 	}
-	
 
 	
 	@Override
@@ -41,11 +50,8 @@ public class ScoreScreen extends AbstractScreen {
 		super.render(delta);
 		
 		if(Gdx.input.justTouched()) {
-			game.setScreen(new MenuScreen(game));
-			GameDotService.timesToRepeat = 0;
-			GameDotService.averageReaction = 0;
-			GameDotService.slowestReaction = 0;
-			GameDotService.fastestReaction = 9999999;
+			oszukiwacz++;
+			setScreen();
 		}
 		
 		spriteBatch.begin();
