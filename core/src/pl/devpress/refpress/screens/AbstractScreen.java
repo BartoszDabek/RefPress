@@ -59,7 +59,6 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		game.dispose();
 	}
 
 	@Override
@@ -78,6 +77,7 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void hide() {
+		dispose();
 	}
 
 

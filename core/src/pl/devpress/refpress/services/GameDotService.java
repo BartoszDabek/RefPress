@@ -96,4 +96,9 @@ public class GameDotService {
 		return MathUtils.random(start, end);
 	}
 	
+	public void dispose() {
+		stage.dispose();
+		redDot.dispose();
+		//sound.dispose();
+	}
 }

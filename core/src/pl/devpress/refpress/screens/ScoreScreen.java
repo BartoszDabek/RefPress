@@ -8,7 +8,7 @@ import pl.devpress.refpress.services.GameDotService;
 
 public class ScoreScreen extends AbstractScreen {
 
-	private int oszukiwacz = 0;
+	private int screenTouched = 0;
 	private String averageReaction;
 	private String slowestReaction;
 	private String fastestReaction;
@@ -35,7 +35,7 @@ public class ScoreScreen extends AbstractScreen {
 
 
 	private void setScreen() {
-		if(oszukiwacz == 2) {
+		if(screenTouched == 2) {
 			game.setScreen(new MenuScreen(game));
 			GameDotService.timesToRepeat = 0;
 			GameDotService.averageReaction = 0;
@@ -50,7 +50,7 @@ public class ScoreScreen extends AbstractScreen {
 		super.render(delta);
 		
 		if(Gdx.input.justTouched()) {
-			oszukiwacz++;
+			screenTouched++;
 			setScreen();
 		}
 		
@@ -60,6 +60,11 @@ public class ScoreScreen extends AbstractScreen {
 		mapFont.draw(spriteBatch, slowestReaction, 150, 350);
 		mapFont.draw(spriteBatch, message, 150, 300);
 		spriteBatch.end();
+	}
+	
+	@Override
+	public void dispose() {
+		mapFont.dispose();
 	}
 	
 }

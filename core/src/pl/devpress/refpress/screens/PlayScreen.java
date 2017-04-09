@@ -7,6 +7,8 @@ import pl.devpress.refpress.services.GameDotService;
 
 public class PlayScreen extends AbstractScreen {
 
+	private GameDotService gameDotService;
+	
 	public PlayScreen(RefPress game) {
 		super(game);
 	}
@@ -19,7 +21,7 @@ public class PlayScreen extends AbstractScreen {
 	
 
 	private void initGameDotService(Stage stage, RefPress game) {
-		new GameDotService(stage, game);
+		gameDotService = new GameDotService(stage, game);
 	}
 
 
@@ -30,6 +32,11 @@ public class PlayScreen extends AbstractScreen {
 		spriteBatch.begin();
 		stage.draw();
 		spriteBatch.end();
+	}
+	
+	@Override
+	public void dispose() {
+		gameDotService.dispose();
 	}
 
 }
