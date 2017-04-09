@@ -1,7 +1,5 @@
 package pl.devpress.refpress.screens;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-
 import pl.devpress.refpress.RefPress;
 import pl.devpress.refpress.ui.PlayButton;
 import pl.devpress.refpress.ui.SettingsButton;
@@ -11,8 +9,6 @@ public class MenuScreen extends AbstractScreen {
 	
 	private PlayButton playButton;
 	private SettingsButton settingsButton;
-	private Table table;
-	
 	public MenuScreen(RefPress game) {
 		super(game);
 	}
@@ -21,23 +17,9 @@ public class MenuScreen extends AbstractScreen {
 	protected void init() {
 		initPlayButton();		
 		initSettingsButton();
-		initTable();
-		addElementToTable();
-
-	}
-
-
-	private void addElementToTable() {
-		table.add(playButton).width(230).height(230).padBottom(50);
-		table.row();
-		table.add(settingsButton).width(200).height(200).padBottom(50);
-	}
-
-	private void initTable() {
-		table = new Table();
-		table.setFillParent(true);
-		table.setDebug(true);
-		stage.addActor(table);
+		stage.setDebugAll(true);
+		stage.addActor(playButton);
+		stage.addActor(settingsButton);
 	}
 
 	private void initSettingsButton() {
@@ -56,6 +38,10 @@ public class MenuScreen extends AbstractScreen {
 		stage.draw();
 		spriteBatch.end();
 	}
-
 	
+	@Override
+	public void dispose() {
+		playButton.dispose();
+	}
+
 }
