@@ -10,15 +10,36 @@ import pl.devpress.refpress.screens.PlayScreen;
 
 public class PlayButton extends Image {
 	
-	public static final String playButtonImg = "playbuttonx200.png";
+	public static final String playButtonImg = "playButtonx200.png";
+	private final static int WIDHT = 220;
+	private final static int HEIGHT = 220;
+	private static Texture playButton;
 	private RefPress game;
 	
 	public PlayButton(RefPress game) {
-		super(new Texture(playButtonImg));
+		super(playButton = new Texture(playButtonImg));
+		
+		this.setOrigin(WIDHT / 2, HEIGHT / 2);
+		this.setSize(WIDHT, HEIGHT);	
+		this.setPosition(setXAxis(), setYAxis());
+		
 		this.game = game;
 		reactOnClick();
 	}
 
+
+	public void dispose() {
+		playButton.dispose();
+	}
+	
+	private int setYAxis() {
+		return 380;
+	}
+	
+	private int setXAxis() {
+		return RefPress.WIDTH/2 - WIDHT/2;
+	}
+	
 	private void reactOnClick() {
 		this.addListener(new ClickListener(){
 			@Override
@@ -28,7 +49,5 @@ public class PlayButton extends Image {
 			}
 		});
 	}
-
-
 	
 }

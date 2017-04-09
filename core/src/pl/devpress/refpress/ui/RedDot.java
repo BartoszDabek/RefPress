@@ -9,14 +9,18 @@ public class RedDot extends Image{
 	public static final String redDotImg = "reddot.png";
 	private final static int WIDHT = 50;
 	private final static int HEIGHT = 50;
+	private static Texture redDot;
 	
 	public RedDot() {
-		super(new Texture(redDotImg));
+		super(redDot = new Texture(redDotImg));
 		
 		this.setOrigin(WIDHT / 2, HEIGHT / 2);
 		this.setSize(WIDHT, HEIGHT);	
 		this.setPosition(getRandomXAxis(),getRandomYAxis());
-		
+	}
+	
+	public void dispose() {
+		redDot.dispose();
 	}
 
 	private float getRandomYAxis() {

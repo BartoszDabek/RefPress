@@ -10,15 +10,35 @@ import pl.devpress.refpress.RefPress;
 public class SettingsButton extends Image {
 	
 	public static final String settingsButtonImg = "settingsbutton.png";
+	private final static int WIDHT = 220;
+	private final static int HEIGHT = 220;
+	private static Texture settingsButton;
 	private RefPress game;
 	
 	public SettingsButton(RefPress game) {
-		super(new Texture(settingsButtonImg));
+		super(settingsButton = new Texture(settingsButtonImg));
+		
+		this.setOrigin(WIDHT / 2, HEIGHT / 2);
+		this.setSize(WIDHT, HEIGHT);	
+		this.setPosition(setXAxis(), setYAxis());
+		
 		this.game = game;
 		
 		reactOnClick();
 	}
 
+	public void dispose() {
+		settingsButton.dispose();
+	}
+	
+	private int setYAxis() {
+		return 150;
+	}
+	
+	private int setXAxis() {
+		return RefPress.WIDTH/2 - WIDHT/2;
+	}
+	
 	private void reactOnClick() {
 		this.addListener(new ClickListener(){
 			@Override
