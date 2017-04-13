@@ -16,7 +16,7 @@ import pl.devpress.refpress.ui.RedDot;
 
 public class GameDotService {
 	
-	public static int timesToRepeat = 0;
+	public static int timesRepeated = 0;
 	public static long averageReaction, slowestReaction;
 	public static long fastestReaction = 9999999;
 	private RefPress game;
@@ -24,6 +24,7 @@ public class GameDotService {
 	private Stage stage;
 	private long currentTime, timeUntilDotSpawn; 
 	private Sound sound;
+	private int timesToRepeat = 1;
 	
 	public GameDotService(Stage stage, RefPress game) {
 		this.game = game;
@@ -37,7 +38,7 @@ public class GameDotService {
 	}
 	
 	public static long getAverageReaction() {
-		return averageReaction/timesToRepeat;
+		return averageReaction/timesRepeated;
 	}
 	
 	private void spawnInRandomTime() {
@@ -71,9 +72,9 @@ public class GameDotService {
 	}
 	
 	private void isGameFinished() {
-		timesToRepeat++;
+		timesRepeated++;
 		
-		if(timesToRepeat >= 5){
+		if(timesRepeated >= timesToRepeat){
 			game.setScreen(new ScoreScreen(game));
 		} else {
 			spawnInRandomTime();
