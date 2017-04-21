@@ -13,18 +13,9 @@ public class ScoreScreen extends AbstractScreen {
 
 	private FreeTypeFontGenerator generator;
 	private FreeTypeFontParameter parameter;
-	private BitmapFont textFont;
-	private BitmapFont scoreFont;
-	private BitmapFont decorationFont;
-	private BitmapFont bigText;
-	private String averageReaction;
-	private String slowestReaction;
-	private String fastestReaction;
-	private String averageScore;
-	private String slowestScore;
-	private String fastestScore;
-	private String message;
-	private String decoration;
+	private BitmapFont textFont, scoreFont, decorationFont, bigText;
+	private String averageReaction, slowestReaction, fastestReaction, averageScore,
+					slowestScore, fastestScore, message, decoration;
 	private int screenTouched = 0;
 	
 	public ScoreScreen(RefPress game) {
@@ -67,19 +58,7 @@ public class ScoreScreen extends AbstractScreen {
 	}
 
 
-	private void setScreen() {
-		if(screenTouched == 2) {
-			resetReactionTimers();
-			game.setScreen(new MenuScreen(game));
-		}
-	}
 	
-	private void resetReactionTimers() {
-		GameDotService.timesRepeated = 0;
-		GameDotService.averageReaction = 0;
-		GameDotService.slowestReaction = 0;
-		GameDotService.fastestReaction = 9999999;
-	}
 
 	private void drawScore() {
 		spriteBatch.begin();
@@ -112,6 +91,20 @@ public class ScoreScreen extends AbstractScreen {
 			setScreen();
 		}
 		
+	}
+	
+	private void setScreen() {
+		if(screenTouched == 2) {
+			resetReactionTimers();
+			game.setScreen(new MenuScreen(game));
+		}
+	}
+	
+	private void resetReactionTimers() {
+		GameDotService.timesRepeated = 0;
+		GameDotService.averageReaction = 0;
+		GameDotService.slowestReaction = 0;
+		GameDotService.fastestReaction = 9999999;
 	}
 	
 	@Override
