@@ -1,7 +1,5 @@
 package pl.devpress.refpress.services;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,21 +17,22 @@ public class GameDotService {
 	public static int timesRepeated = 0;
 	public static long averageReaction, slowestReaction;
 	public static long fastestReaction = 9999999;
+	private GameSoundServiceSingleton gameSoundService;
 	private RefPress game;
 	private RedDot redDot;
 	private Stage stage;
 	private long currentTime, timeUntilDotSpawn; 
-	private Sound sound;
 	private int timesToRepeat = 1;
+
 	
 	public GameDotService(Stage stage, RefPress game) {
 		this.game = game;
 		this.stage = stage;
+		gameSoundService = GameSoundServiceSingleton.getInstance();
 		init();
 	}
 
 	private void init() {
-		sound = Gdx.audio.newSound(Gdx.files.internal("Powerup.ogg"));
 		spawnInRandomTime();
 	}
 	
@@ -61,7 +60,7 @@ public class GameDotService {
 		redDot.addListener(new ClickListener(){
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				sound.play();
+				gameSoundService.play();
 				redDot.remove();
 				generateReactions();
 				isGameFinished();
@@ -100,6 +99,6 @@ public class GameDotService {
 	public void dispose() {
 		stage.dispose();
 		redDot.dispose();
-		//sound.dispose();
+		//gameSoundService.dispose();
 	}
 }
