@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import pl.devpress.refpress.RefPress;
+import pl.devpress.refpress.screens.SettingsScreen;
 
 public class SettingsButton extends Image {
 	
@@ -21,7 +22,6 @@ public class SettingsButton extends Image {
 		this.setOrigin(WIDHT / 2, HEIGHT / 2);
 		this.setSize(WIDHT, HEIGHT);	
 		this.setPosition(setXAxis(), setYAxis());
-		
 		this.game = game;
 		
 		reactOnClick();
@@ -43,7 +43,7 @@ public class SettingsButton extends Image {
 		this.addListener(new ClickListener(){
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				System.out.println("settings");
+				game.setScreen(new SettingsScreen(game));
 				return super.touchDown(event, x, y, pointer, button);
 			}
 		});
