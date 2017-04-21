@@ -8,17 +8,21 @@ import com.badlogic.gdx.audio.Sound;
 
 public class GameSoundServiceSingleton {
 	private static GameSoundServiceSingleton instance = null;
-	private BigDecimal start = new BigDecimal(1).setScale(1, RoundingMode.FLOOR);
-	private BigDecimal setValueOfSound = new BigDecimal(0.1).setScale(1, RoundingMode.FLOOR);
-	private static Sound soundWhenDotTouched;
-	float asd;
-	
+	private BigDecimal start;
+	private BigDecimal setValueOfSound;
+	private Sound soundWhenDotTouched;
 	
     private GameSoundServiceSingleton() {
-    	soundWhenDotTouched = Gdx.audio.newSound(Gdx.files.internal("Powerup.ogg"));
+    	init();
 	}
 	
-    public static GameSoundServiceSingleton getInstance() {
+    private void init() {
+    	start = new BigDecimal(1).setScale(1, RoundingMode.FLOOR);
+    	setValueOfSound = new BigDecimal(0.1).setScale(1, RoundingMode.FLOOR);
+    	soundWhenDotTouched = Gdx.audio.newSound(Gdx.files.internal("Powerup.ogg"));
+	}
+
+	public static GameSoundServiceSingleton getInstance() {
         if(instance == null) {
            instance = new GameSoundServiceSingleton();
         }
