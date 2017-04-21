@@ -6,9 +6,9 @@ import pl.devpress.refpress.ui.SettingsButton;
 
 public class MenuScreen extends AbstractScreen {
 	
-	
 	private PlayButton playButton;
 	private SettingsButton settingsButton;
+	
 	public MenuScreen(RefPress game) {
 		super(game);
 	}
@@ -17,7 +17,6 @@ public class MenuScreen extends AbstractScreen {
 	protected void init() {
 		initPlayButton();		
 		initSettingsButton();
-		stage.setDebugAll(true);
 		stage.addActor(playButton);
 		stage.addActor(settingsButton);
 	}

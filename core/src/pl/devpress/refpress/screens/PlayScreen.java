@@ -15,7 +15,6 @@ public class PlayScreen extends AbstractScreen {
 
 	@Override
 	protected void init() {
-		stage.setDebugAll(true);
 		initGameDotService(stage, game);
 	}
 	

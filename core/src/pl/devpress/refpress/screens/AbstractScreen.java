@@ -18,6 +18,7 @@ public abstract class AbstractScreen implements Screen {
 	protected Stage stage;
 	protected SpriteBatch spriteBatch;
 	private Viewport viewport;
+	private boolean debuggingMode = true;
 	
 	
 	public AbstractScreen(RefPress game) {
@@ -27,6 +28,7 @@ public abstract class AbstractScreen implements Screen {
 		stage = new Stage(viewport);
 		spriteBatch = new SpriteBatch();
 		Gdx.input.setInputProcessor(stage);
+		stage.setDebugAll(debuggingMode);
 		init();
 	}
 	
