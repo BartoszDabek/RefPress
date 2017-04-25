@@ -33,9 +33,16 @@ public class GameSoundServiceSingleton {
 		soundWhenDotTouched.play(start.floatValue());
 	}
 	
-	public void subtractVolume() {
+	public void volumeDown() {
 		if( start.floatValue() > 0 ){
 			start = start.subtract(setValueOfSound);
+		}
+		System.out.println(start);
+	}
+	
+	public void volumeUp() {
+		if( start.floatValue() < 1 ){
+			start = start.add(setValueOfSound);
 		}
 		System.out.println(start);
 	}
