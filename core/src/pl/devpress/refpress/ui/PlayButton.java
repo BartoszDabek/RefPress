@@ -10,8 +10,8 @@ import pl.devpress.refpress.screens.PlayScreen;
 
 public class PlayButton extends Image {
 	
-	public static final String playButtonImg = "playButtonx200.png";
-	private final static int WIDHT = 220;
+	public static final String playButtonImg = "playButton.png";
+	private final static int WIDHT = 190;
 	private final static int HEIGHT = 220;
 	private static Texture playButton;
 	private RefPress game;
