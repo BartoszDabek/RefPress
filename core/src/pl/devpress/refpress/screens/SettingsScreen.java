@@ -50,6 +50,8 @@ public class SettingsScreen extends AbstractScreen {
 	@Override
 	public void dispose() {
 		soundDown.dispose();
+		plusButton.dispose();
+		backToMenu.dispose();
 	}
 
 }
