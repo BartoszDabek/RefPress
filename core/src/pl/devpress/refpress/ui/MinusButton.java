@@ -34,7 +34,7 @@ public class MinusButton extends Image {
 	}
 	
 	private int setXAxis() {
-		return 20;
+		return 70;
 	}
 	
 	private void reactOnClick() {

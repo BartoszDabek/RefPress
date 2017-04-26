@@ -31,7 +31,7 @@ public class BackToMenu extends Image {
 	}
 	
 	private int setYAxis() {
-		return 100;
+		return 150;
 	}
 	
 	private int setXAxis() {

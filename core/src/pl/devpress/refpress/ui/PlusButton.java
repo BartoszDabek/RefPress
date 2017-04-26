@@ -30,11 +30,11 @@ public class PlusButton extends Image {
 	}
 	
 	private int setYAxis() {
-		return 450;
+		return 445;
 	}
 	
 	private int setXAxis() {
-		return 270;
+		return 260;
 	}
 	
 	private void reactOnClick() {
