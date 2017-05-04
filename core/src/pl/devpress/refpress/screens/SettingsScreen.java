@@ -2,6 +2,7 @@ package pl.devpress.refpress.screens;
 
 import pl.devpress.refpress.RefPress;
 import pl.devpress.refpress.ui.BackToMenu;
+import pl.devpress.refpress.ui.CheckBox;
 import pl.devpress.refpress.ui.MinusButton;
 import pl.devpress.refpress.ui.PlusButton;
 
@@ -10,6 +11,7 @@ public class SettingsScreen extends AbstractScreen {
 	private MinusButton soundDown;
 	private PlusButton plusButton;
 	private BackToMenu backToMenu;
+	private CheckBox checkBox;
 	
 	public SettingsScreen(RefPress game) {
 		super(game);
@@ -20,9 +22,15 @@ public class SettingsScreen extends AbstractScreen {
 		initSoundDown();
 		initPlusButton();
 		initBackToMenu();
+		initCheckBox();
 		stage.addActor(soundDown);
 		stage.addActor(plusButton);
 		stage.addActor(backToMenu);
+		stage.addActor(checkBox);
+	}
+
+	private void initCheckBox() {
+		checkBox = new CheckBox();
 	}
 
 	private void initBackToMenu() {
