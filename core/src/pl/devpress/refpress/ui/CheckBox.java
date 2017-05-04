@@ -2,22 +2,59 @@ package pl.devpress.refpress.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import pl.devpress.refpress.RefPress;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class CheckBox {
-    private static final String checkBoxImg = "checkBox.atlas";
-    private TextureAtlas textureAtlas;
-    private TextureRegion textureRegion;
-    private RefPress game;
+import pl.devpress.refpress.services.GameSoundServiceSingleton;
 
-    public CheckBox(RefPress game) {
-        textureAtlas = new TextureAtlas(Gdx.files.internal(checkBoxImg));
-        textureRegion = textureAtlas.findRegion("checkBoxChecked");
+public class CheckBox extends Button {
 
-        this.game = game;
+	private static final String checkBoxImg = "checkBox.atlas";
+	private GameSoundServiceSingleton gameSoundServiceSingleton;
+    private static ButtonStyle buttonStyle = new ButtonStyle();
+    private boolean checkOrNot = false;
+
+    public CheckBox() {
+    	super(prepareButtonStyle());
+        
+        init();
+        reactOnClick();
     }
+
+	private void reactOnClick() {
+		this.addListener(new ClickListener(){
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				if(checkOrNot){
+					gameSoundServiceSingleton.unMute();
+					checkOrNot = false;
+				} else {
+					gameSoundServiceSingleton.mute();
+					checkOrNot = true;
+				}
+				return super.touchDown(event, x, y, pointer, button);
+			}
+		});
+	}
+
+	private void init() {
+		gameSoundServiceSingleton = GameSoundServiceSingleton.getInstance();
+		
+		this.setSize(150, 150);
+		this.setX(30);
+		this.setY(30);
+	}
+    
+	private static ButtonStyle prepareButtonStyle() {
+		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(checkBoxImg));
+		Skin skin = new Skin(atlas);
+		buttonStyle.up = skin.getDrawable("checkBoxUnchecked");
+		buttonStyle.checked = skin.getDrawable("checkBoxChecked");
+		
+		return buttonStyle;
+	}
 
 
 
