@@ -37,14 +37,20 @@ public class GameSoundServiceSingleton {
 		if( start.floatValue() > 0 ){
 			start = start.subtract(setValueOfSound);
 		}
-		System.out.println(start);
 	}
 	
 	public void volumeUp() {
 		if( start.floatValue() < 1 ){
 			start = start.add(setValueOfSound);
 		}
-		System.out.println(start);
+	}
+	
+	public void mute() {
+		start = new BigDecimal(0).setScale(1, RoundingMode.FLOOR);
+	}
+	
+	public void unMute() {
+		start = new BigDecimal(1).setScale(1, RoundingMode.FLOOR);
 	}
 	
 	public void dispose() {
