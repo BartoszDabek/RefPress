@@ -30,7 +30,7 @@ public class MinusButton extends Image {
 	}
 	
 	private int setYAxis() {
-		return 500;
+		return 570;
 	}
 	
 	private int setXAxis() {
