@@ -9,14 +9,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import pl.devpress.refpress.services.GameSoundServiceSingleton;
 
-public class CheckBox extends Button {
+public class MuteSoundButton extends Button {
 
 	private static final String checkBoxImg = "checkBox.atlas";
 	private GameSoundServiceSingleton gameSoundServiceSingleton;
     private static ButtonStyle buttonStyle = new ButtonStyle();
     private boolean checkOrNot = false;
 
-    public CheckBox() {
+    public MuteSoundButton() {
     	super(prepareButtonStyle());
         
         init();
@@ -43,8 +43,8 @@ public class CheckBox extends Button {
 		gameSoundServiceSingleton = GameSoundServiceSingleton.getInstance();
 		
 		this.setSize(150, 150);
-		this.setX(30);
-		this.setY(30);
+		this.setX(260);
+		this.setY(340);
 	}
     
 	private static ButtonStyle prepareButtonStyle() {
