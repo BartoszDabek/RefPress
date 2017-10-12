@@ -1,7 +1,4 @@
 # RefPress
-.
-#### Check our site for more details!
-[![|](https://image.ibb.co/nAz9MF/logogithub.png)](http://devpress.pl/)
 
 RefPress to aplikacja mobilna tworzona w ramach konkursu ['Daj się poznać'](http://devstyle.pl/daj-sie-poznac/)
 
